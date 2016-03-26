@@ -47,8 +47,6 @@ app.get('/', function(req, res) {
                     '!', 'audioresample',
                     '!', 'opusenc',
                     '!', 'rtpopuspay',
-                    '!', 'queue2',
-                    '!', 'm.', 'webmmux', 'name=m', 'streamable=true',
                     '!', 'tcpclientsink', 'host=localhost',
                     'port='+tcpServer.address().port];
 
