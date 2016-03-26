@@ -42,7 +42,7 @@ app.get('/', function(req, res) {
         var cmd = 'gst-launch-0.10';
         var options = {};
         var args =
-                [ 'alsasrc', 'device=plughw:Set',
+                [ 'alsasrc',
                     '!', 'audioconvert',
                     '!', 'audioresample',
                     '!', 'opusenc',
