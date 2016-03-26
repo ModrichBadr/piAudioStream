@@ -42,13 +42,16 @@ app.get('/', function(req, res) {
         var cmd = 'gst-launch-0.10';
         var options = {};
         var args =
-                [ 'alsasrc', 'is-live=1',
+                [ 'alsasrc', 'device=plughw:Set',
                     '!', 'audioconvert',
-                    '!', 'vorbisenc',
+                    '!', 'audioresample',
+                    '!', 'opusenc',
+                    '!', 'rtpopuspay',
                     '!', 'queue2',
                     '!', 'm.', 'webmmux', 'name=m', 'streamable=true',
                     '!', 'tcpclientsink', 'host=localhost',
                     'port='+tcpServer.address().port];
+
 
         var gstMuxer = child.spawn(cmd, args, options);
 
