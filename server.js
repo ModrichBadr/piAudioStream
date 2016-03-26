@@ -23,7 +23,7 @@ app.get('/', function(req, res) {
         'Date':date.toUTCString(),
         'Connection':'close',
         'Cache-Control':'private',
-        'Content-Type':'audio/mpeg, audio/x-mpeg, audio/x-mpeg-3, audio/mpeg3',
+        'Content-Type':'audio/mpeg',
         'Server':'CustomStreamer/0.0.1'
     });
 
