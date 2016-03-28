@@ -7,7 +7,7 @@ var mic = require('./microphone'),
     net     = require('net');
 
 http.createServer(function (req, res) {
-    res.writeHead(200, { 'Content-Length': total, 'Content-Type': 'audio/mp3' });
+    res.writeHead(200, { 'Content-Type': 'audio/mp3' });
 
     mic.startCapture({ mp3: true });
     console.log('---------- Audio Stream --------');
