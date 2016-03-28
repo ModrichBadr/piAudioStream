@@ -16,7 +16,7 @@ var start = function(options) {
     if(ps == null) {
         ps = spawn('arecord', ['-D', 'plughw:1,0', '-f', 'dat']);
 
-        if(options.mp3output === true) {
+        if(options.mp3 === true) {
             var encoder = new lame.Encoder( {
                 channels: 2,
                 bitDepth: 16,

@@ -1,35 +1,22 @@
 console.log('-------------- Starting ------------');
 
 var mic = require('./microphone'),
-    wrtc = require('wrtc'),
-    myConnectionId = 'call28892643582',
-    peer,
-    micStream;
+    express = require('express'),
+    http    = require('http'),
+    fs      = require('fs'),
+    net     = require('net');
 
-//global for peerjs to use.
-RTCPeerConnection = wrtc.RTCPeerConnection;
-RTCSessionDescription = wrtc.RTCSessionDescription;
-RTCIceCandidate = wrtc.RTCIceCandidate;
-//require peer
-require('peerjs/lib/exports.js');
+http.createServer(function (req, res) {
+    res.writeHead(200, { 'Content-Length': total, 'Content-Type': 'audio/mp3' });
 
+    mic.startCapture({ mp3: true });
+    console.log('---------- Audio Stream --------');
+    console.log(mic.audioStream);
 
-// Create a Peer instance
-peer = new Peer(myConnectionId, {
-    key: 'mrl7pp3bfls1yvi',
-    debug: 3,
-    config: {
-        iceServers: [
-            { url: 'stun:stun.l.google.com:19302' },
-            { url: 'stun:stun1.l.google.com:19302' }
-        ]
-    }
-});
+    mic.audioStream.on('data', function(data) {
+        fs.createReadStream(path).pipe(data)
+    });
 
-mic.startCapture();
-mic.audioStream.on('data', function(data) {
-    micStream = data
-});
+}).listen(1337, '127.0.0.1');
+console.log('Server running at http://127.0.0.1:1337/');
 
-var peerConnectionId = 'answer28892643582',
-    outgoingCall = peer.call(peerConnectionId, micStream);
